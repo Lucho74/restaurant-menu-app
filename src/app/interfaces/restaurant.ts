@@ -3,10 +3,11 @@ export interface Restaurant {
     email: string,
     password: string,
     name: string,
-    imageUrl: string,
     description: string,
+    imageUrl: string,
     number: string,
     address: string,
+    views: number,
     openingTime: string,
     closingTime: string,
     openingDays: string
@@ -14,6 +15,14 @@ export interface Restaurant {
 
 export type NewRestaurant = Omit<Restaurant, "id">;
 
-export type RestaurantLogged = Omit<Restaurant, "password">;
+export type RestaurantPublic = Omit<Restaurant, "password">;
+
+export type EditedRestaurant = Omit<Restaurant, "id" | "password" | "email" | "views">;
+
+
+
+
+
+
 
 

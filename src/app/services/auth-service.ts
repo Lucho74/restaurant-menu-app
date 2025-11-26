@@ -11,9 +11,11 @@ export class AuthService {
     // Si tengo sesion iniciada reviso que no este vencida
     if (this.token) {
       this.revisionTokenInterval = this.revisionToken()
+
     };
   };
-  
+
+  id: number | string | undefined
   router = inject(Router);
   token: null | string = localStorage.getItem("token");
   revisionTokenInterval: number | undefined;
@@ -57,5 +59,30 @@ export class AuthService {
       };
     }, 600)
   };
+
+  getIdFromToken(): string | number | null {
+    if (!this.token) return null;
+    
+    try {
+      const base64Url = this.token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      const claims: any = JSON.parse(jsonPayload);
+      
+  
+      return claims.id;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
+
+
+  isAuthenticated() {
+    return this.token !== null;
+  }
 
 }

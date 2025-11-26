@@ -6,7 +6,7 @@ export const onlyRestaurantGuard: CanActivateChildFn = (childRoute, state) => {
   const authService = inject(AuthService)
   const router = inject(Router);
   if(!authService.token){
-  const redirectPath = router.parseUrl("/login");
+  const redirectPath = router.parseUrl("login");
     return new RedirectCommand(redirectPath, {
       skipLocationChange: true,
     })
