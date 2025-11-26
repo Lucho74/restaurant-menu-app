@@ -1,0 +1,210 @@
+/* MOBILE FIRST - Estilos base para móvil */
+
+/* Fondo que inhabilita la página de atrás */
+.product-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 0;
+}
+
+/* Modal - Ocupa toda la pantalla en móvil */
+.product-modal {
+  background: white;
+  border-radius: 0;
+  overflow: hidden;
+  max-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Botón cerrar */
+.close-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+/* Imagen del producto */
+.product-modal-image {
+  width: 100%;
+  height: 300px;
+}
+
+.product-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Contenido */
+.product-modal-content {
+  padding: 1.5rem 1rem;
+}
+
+/* Etiquetas */
+.modal-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-tag {
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Nombre */
+.modal-product-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+}
+
+/* Descripción */
+.modal-product-description {
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+/* Categorías */
+.modal-categories {
+  margin-bottom: 1.5rem;
+}
+
+.modal-categories strong {
+  color: #1a1a1a;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.category-item {
+  background: #f8f9fa;
+  color: #6c757d;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  border: 1px solid #e9ecef;
+}
+
+/* Precios */
+.modal-pricing {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.modal-current-price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.modal-original-price {
+  font-size: 1.2rem;
+  color: #6c757d;
+  text-decoration: line-through;
+}
+
+.modal-discount {
+  background: #28a745;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Botón agregar */
+.modal-add-btn {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.modal-add-btn:hover {
+  background: #e55a2b;
+}
+
+/* TABLET (769px en adelante) */
+@media (min-width: 769px) {
+  .product-modal-overlay {
+    padding: 1rem;
+  }
+  
+  .product-modal {
+    border-radius: 20px;
+    max-height: 90vh;
+    height: auto;
+    max-width: 600px;
+  }
+  
+  .product-modal-image {
+    height: 250px;
+  }
+  
+  .product-modal-content {
+    padding: 1.5rem;
+  }
+}
+
+/* PC (1025px en adelante) */
+@media (min-width: 1025px) {
+  .product-modal {
+    max-width: 500px;
+  }
+  
+  .modal-product-name {
+    font-size: 1.8rem;
+  }
+  
+  .modal-product-description {
+    font-size: 1rem;
+  }
+}

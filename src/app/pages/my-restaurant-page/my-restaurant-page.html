@@ -1,0 +1,50 @@
+<div
+    class="bg-gradient-to-b from-gray-50 to-gray-100 px-4 py-10 pb-32 md:fixed md:inset-0 md:h-screen md:w-screen md:overflow-hidden md:py-8 md:pb-8">
+    <div class="md:w-full md:max-w-6xl md:mx-auto">
+
+        <header class="text-center mb-10 md:mb-8 max-w-2xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl font-bold text-teal-700 mb-3">Mi Restaurante</h1>
+            <p class="text-gray-600 text-lg">Gestiona tu negocio desde un solo lugar</p>
+        </header>
+
+        <div class="grid gap-6 max-w-4xl mx-auto sm:grid-cols-2 lg:grid-cols-2">
+
+            <a routerLink="info"
+                class="group bg-white rounded-2xl p-6 cursor-pointer transition-all shadow-md hover:shadow-xl hover:-translate-y-1 border-2 border-transparent hover:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600">
+                <div class="flex flex-col items-center text-center gap-3">
+                    <div
+                        class="w-14 h-14 rounded-full bg-teal-100 flex items-center justify-center mb-2 group-hover:bg-teal-600 transition-colors">
+                        <lucide-angular [img]="EditIcon" [size]="24" [strokeWidth]="3"
+                            class="text-teal-600 group-hover:text-white transition-colors"></lucide-angular>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-teal-700 transition-colors">Información
+                    </h3>
+                    <p class="text-sm text-gray-600">Modifica datos, horarios e imagen de tu local</p>
+                </div>
+            </a>
+
+            <a routerLink="menu"
+                class="group bg-white rounded-2xl p-6 cursor-pointer transition-all shadow-md hover:shadow-xl hover:-translate-y-1 border-2 border-transparent hover:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600">
+                <div class="flex flex-col items-center text-center gap-3">
+                    <div
+                        class="w-14 h-14 rounded-full bg-teal-100 flex items-center justify-center mb-2 group-hover:bg-teal-600 transition-colors">
+                        <lucide-angular [img]="UtensilsIcon" [size]="24" [strokeWidth]="3"
+                            class="text-teal-600 group-hover:text-white transition-colors"></lucide-angular>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-teal-700 transition-colors">Mi menú</h3>
+                    <p class="text-sm text-gray-600">Gestiona productos, categorías y precios</p>
+                </div>
+            </a>
+
+
+        </div>
+
+        <div class="flex justify-center mt-10">
+            <button (click)="logout()"
+                class="group bg-white rounded-2xl px-8 py-4 cursor-pointer transition-all shadow-md hover:shadow-xl hover:-translate-y-1 border-2 border-transparent hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 flex items-center gap-3">
+                <lucide-angular [img]="LogOutIcon" [size]="20" [strokeWidth]="2" class="text-red-600"></lucide-angular>
+                <span class="text-lg font-semibold text-red-600">Cerrar sesión</span>
+            </button>
+        </div>
+    </div>
+</div>

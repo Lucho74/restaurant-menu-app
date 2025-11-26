@@ -1,0 +1,119 @@
+<div class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-0 sm:p-4">
+
+    <div
+        class="bg-white rounded-none sm:rounded-2xl shadow-2xl w-full h-full sm:h-auto sm:max-w-2xl sm:max-h-[90vh] flex flex-col overflow-hidden">
+
+        <header
+            class="sticky top-0 z-10 bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center justify-between">
+            <button (click)="close()"
+                class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
+                title="Cerrar">
+                <span class="text-2xl text-gray-600 leading-none">
+                    <lucide-angular [img]="backIcon" [size]="24" [strokeWidth]="3"
+                        class="text-teal-600 group-hover:text-white transition-colors"></lucide-angular>
+                </span>
+            </button>
+            @if(router.url.includes("add-product")){
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-teal-700">Crear producto</h1>
+            }
+            @else {
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-teal-700">Editar producto</h1>
+            }
+        </header>
+        <div class="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6">
+
+            <form (ngSubmit)="handleFormSubmission(productForm)" #productForm="ngForm" class="space-y-6">
+
+                <div>
+                    <label for="name" class="block text-sm font-semibold text-gray-900 mb-2">
+                        Nombre del Producto*
+                    </label>
+                    <input id="name" name="name" type="text" required ngModel #name="ngModel"
+                        placeholder="Ej: Hamburguesa Clásica"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white" />
+                </div>
+
+                <div>
+                    <label for="price" class="block text-sm font-semibold text-gray-900 mb-2">
+                        Precio*
+                    </label>
+                    <input id="price" name="price" type="number" required ngModel #price="ngModel" min="0"
+                        placeholder="0.00"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white" />
+                </div>
+
+                <div>
+                    <label for="description" class="block text-sm font-semibold text-gray-900 mb-2">
+                        Descripción
+                    </label>
+                    <textarea id="description" name="description" rows="4" ngModel #description="ngModel"
+                        placeholder="Describe tu producto..."
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white resize-none"></textarea>
+                </div>
+
+                <div>
+                    <label for="imageUrl" class="block text-sm font-semibold text-gray-900 mb-2">
+                        URL de la imagen
+                    </label>
+                    <input id="imageUrl" name="imageUrl" type="url" ngModel #imageUrl="ngModel"
+                        placeholder="https://ejemplo.com/imagen.jpg"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white" />
+                </div>
+
+                <div class="space-y-3">
+                    <label
+                        class="flex items-center gap-3 px-4 py-3 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-teal-600 has-[:checked]:bg-teal-50 has-[:checked]:border-teal-600">
+                        <input type="checkbox" id="isFeatured" name="isFeatured" ngModel #isFeatured="ngModel"
+                            class="w-4 h-4 text-teal-600 rounded focus:ring-2 focus:ring-teal-600" />
+                        <span class="text-sm font-medium text-gray-900">Producto destacado</span>
+                    </label>
+
+                    @if(happyHour?.isActive) {
+                    <label
+                        class="flex items-center gap-3 px-4 py-3 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-amber-600 has-[:checked]:bg-amber-50 has-[:checked]:border-amber-600">
+                        <input type="checkbox" id="hasHappyHour" name="hasHappyHour" ngModel #hasHappyHour="ngModel"
+                            class="w-4 h-4 text-amber-600 rounded focus:ring-2 focus:ring-amber-600" />
+                        <span class="text-sm font-medium text-gray-900">Incluir en happy Hour</span>
+                    </label>
+                    }
+                </div>
+
+
+                <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200">
+                    <button type="submit" [disabled]="productForm.invalid || productForm.pristine"
+                        class="sm:flex-1 px-6 py-3 bg-teal-700 text-white rounded-xl font-semibold hover:bg-teal-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-teal-600 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0">
+                        @if(router.url.includes("add-product")){
+                        Crear producto
+                        }
+                        @else {
+                        Guardar cambios
+                        }
+                    </button>
+                    @if(router.url.includes("edit-product")){
+                    @if (!productBack?.hasDiscount) {
+                    <a type="button" routerLink="add-discount"
+                        class="sm:flex-1 px-6 py-3 bg-blue-600 text-center text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Agregar descuento
+                    </a>
+                    }
+                    @else {
+                        <button type="button" (click)="deleteDiscount(productBack!)"
+                        class="sm:flex-1 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Eliminar descuento
+                    </button>
+                    }
+                    <button type="button" (click)="deleteProduct(productBack!)"
+                        class="sm:flex-1 px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500">
+                        Eliminar
+                    </button>
+                    }
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<router-outlet></router-outlet>

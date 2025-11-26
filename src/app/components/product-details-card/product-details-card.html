@@ -1,0 +1,55 @@
+<div class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-0 md:p-4">
+    <div
+        class="relative bg-white h-screen md:h-auto w-full md:max-w-xl md:rounded-3xl shadow-xl overflow-y-auto max-h-screen md:max-h-[90vh]">
+        <button
+            class="absolute top-4 left-4 bg-black/40 text-white rounded-xl w-10 h-10 cursor-pointer z-10 flex items-center justify-center transition-colors hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-teal-600"
+            (click)="close()" aria-label="Cerrar">
+            <lucide-angular [img]="backIcon" [size]="24" [strokeWidth]="3"></lucide-angular>
+        </button>
+
+        <div class="w-full h-72 md:h-64">
+            <img src={{product?.imageUrl}} class="w-full h-full object-cover">
+        </div>
+
+        <div class="p-6">
+            @if (product?.hasDiscount || product?.hasHappyHour) {
+            <div class="flex flex-wrap gap-2 mb-4">
+                @if (product?.hasDiscount) {
+                <span
+                    class="bg-[var(--primary)] text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide">Destacado</span>
+                }
+                @if (product?.hasHappyHour) {
+                <span
+                    class="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wide">HappyHour</span>
+                }
+            </div>
+            }
+
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 break-words">{{product?.name}}</h1>
+            <p class="text-gray-600 leading-relaxed mb-6">{{product?.description}}</p>
+            @if (productCategories) {
+            <div class="mb-6">
+                <strong class="text-gray-900 block mb-2">Categorías:</strong>
+                <div class="flex flex-wrap gap-2">
+                    @for(categoryName of productCategories; track $index) {
+                    <span
+                        class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs border border-gray-200">{{categoryName}}</span>
+                    }
+                </div>
+            </div>
+            }
+            <div class="flex items-center gap-4 mb-6 flex-wrap">
+                @if (!product?.hasDiscount) {
+                <span class="text-2xl font-bold text-gray-900">${{product?.price}}</span>
+                }
+                @else {
+                <span class="text-2xl font-bold text-gray-900">${{product?.discountPrice}}</span>
+                <span class="text-xl text-gray-500 line-through">${{product?.price}}</span>
+                <span
+                    class="bg-green-600 text-white px-2 py-1 rounded-md font-semibold text-sm tracking-wide">{{product?.discountPercentage}}%
+                    OFF</span>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,195 @@
+<div class="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
+
+    <header class="sticky top-0 z-10 bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 lg:px-10 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <button (click)="back()"
+                class="flex items-center gap-2 p-2 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500">
+                <lucide-angular [img]="BackIcon" [size]="20" [strokeWidth]="2"></lucide-angular>
+                <span class="hidden sm:inline">Volver</span>
+            </button>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-700">Editar información</h1>
+        </div>
+    </header>
+
+    <main class="px-4 sm:px-6 lg:px-10 py-8 pb-32 max-w-6xl mx-auto">
+        <form (ngSubmit)="handleFormSubmission(restaurantForm)"
+            class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-gray-200" #restaurantForm="ngForm">
+
+            <section class="mb-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-teal-600 rounded-full"></span>
+                    Información de tu restaurante
+                </h2>
+
+                <div class="grid gap-6 sm:grid-cols-2">
+                    <div class="sm:col-span-2">
+                        <label for="name" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Nombre del Restaurante*
+                        </label>
+                        <input type="text" name="name" id="name" placeholder="Pon el nombre de tu restaurante" ngModel
+                            #name="ngModel" required="true" maxlength="50" autocomplete="name"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white">
+                        @if (!name.pristine && name.invalid) {
+                        <span class="block text-red-600 text-xs mt-1">Nombre requerido</span>
+                        }
+                    </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="description" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Descripción
+                        </label>
+                        <textarea name="description" id="description" rows="4"
+                            placeholder="Describe tu restaurante, especialidades, ambiente..." ngModel
+                            #description="ngModel"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Teléfono
+                        </label>
+                        <input type="tel" name="number" id="number" placeholder="+12 345 6789" ngModel #number="ngModel"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white">
+                    </div>
+
+                    <div>
+                        <label for="address" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Dirección
+                        </label>
+                        <input type="text" name="address" id="address" placeholder="Dirección del local" ngModel
+                            #address="ngModel"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white">
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-teal-600 rounded-full"></span>
+                    Horarios de apertura
+                </h2>
+                <div class="grid gap-6 sm:grid-cols-2">
+                    <div>
+                        <label for="openingTime" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Hora de apertura*
+                        </label>
+                        <input type="time" name="openingTime" id="openingTime" ngModel #openingTime="ngModel"
+                            required="true"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white">
+                        @if (!openingTime.pristine && openingTime.invalid) {
+                        <span class="block text-red-600 text-xs mt-1">Requerido</span>
+                        }
+                    </div>
+                    <div>
+                        <label for="closingTime" class="block text-sm font-semibold text-gray-900 mb-2">
+                            Hora de cierre*
+                        </label>
+                        <input type="time" name="closingTime" id="closingTime" ngModel #closingTime="ngModel"
+                            required="true"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white">
+                        @if (!closingTime.pristine && closingTime.invalid) {
+                        <span class="block text-red-600 text-xs mt-1">Requerido</span>
+                        }
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-semibold text-gray-900 mb-3">
+                            Días de operación*
+                        </label>
+                        <div class="flex flex-wrap gap-2">
+                            <label
+                                class="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-teal-600 has-[:checked]:bg-teal-700 has-[:checked]:border-teal-700 has-[:checked]:text-white">
+                                <input name="monday" type="checkbox" ngModel #monday="ngModel"
+                                    class="w-4 h-4 text-teal-600 rounded focus:ring-2 focus:ring-teal-600">
+                                <span class="text-sm font-medium">Lunes</span>
+                            </label>
+                            <label
+                                class="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-teal-600 has-[:checked]:bg-teal-700 has-[:checked]:border-teal-700 has-[:checked]:text-white">
+                                <input name="tuesday" type="checkbox" ngModel #tuesday="ngModel"
+                                    class="w-4 h-4 text-teal-600 rounded focus:ring-2 focus:ring-teal-600">
+                                <span class="text-sm font-medium">Martes</span>
+                            </label>
+                            <label
+                                class="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-teal-600 has-[:checked]:bg-teal-700 has-[:checked]:border-teal-700 has-[:checked]:text-white">
+                                <input name="wednesday" type="checkbox" ngModel #wednesday="ngModel"
+                                    class="w-4 h-4 text-teal-600 rounded focus:ring-2 focus:ring-teal-600">
+                                <span class="text-sm font-medium">Miércoles</span>
+                            </label>
+                            <label
+                                class="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-teal-600 has-[:checked]:bg-teal-700 has-[:checked]:border-teal-700 has-[:checked]:text-white">
+                                <input name="thursday" type="checkbox" ngModel #thursday="ngModel"
+                                    class="w-4 h-4 text-teal-600 rounded focus:ring-2 focus:ring-teal-600">
+                                <span class="text-sm font-medium">Jueves</span>
+                            </label>
+                            <label
+                                class="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-teal-600 has-[:checked]:bg-teal-700 has-[:checked]:border-teal-700 has-[:checked]:text-white">
+                                <input name="friday" type="checkbox" ngModel #friday="ngModel"
+                                    class="w-4 h-4 text-teal-600 rounded focus:ring-2 focus:ring-teal-600">
+                                <span class="text-sm font-medium">Viernes</span>
+                            </label>
+                            <label
+                                class="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-teal-600 has-[:checked]:bg-teal-700 has-[:checked]:border-teal-700 has-[:checked]:text-white">
+                                <input name="saturday" type="checkbox" ngModel #saturday="ngModel"
+                                    class="w-4 h-4 text-teal-600 rounded focus:ring-2 focus:ring-teal-600">
+                                <span class="text-sm font-medium">Sábado</span>
+                            </label>
+                            <label
+                                class="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 rounded-xl cursor-pointer transition-all hover:border-teal-600 has-[:checked]:bg-teal-700 has-[:checked]:border-teal-700 has-[:checked]:text-white">
+                                <input name="sunday" type="checkbox" ngModel #sunday="ngModel"
+                                    class="w-4 h-4 text-teal-600 rounded focus:ring-2 focus:ring-teal-600">
+                                <span class="text-sm font-medium">Domingo</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mb-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <span class="w-1 h-6 bg-teal-600 rounded-full"></span>
+                    Imagen de tu restaurante
+                </h2>
+
+                <div class="space-y-4">
+                    <div
+                        class="relative w-full h-48 sm:h-64 bg-gray-100 rounded-xl overflow-hidden border-2 border-dashed border-gray-300">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
+                            @if (restaurantBack?.imageUrl) {
+                            <img src={{restaurantBack?.imageUrl}} alt="">
+                            }
+                            @else {
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                                <circle cx="9" cy="9" r="2" />
+                                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                            </svg>
+                            <p class="mt-2 text-sm">Vista previa de la imagen</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="imageUrl" class="block text-sm font-semibold text-gray-900 mb-2">
+                            URL de la imagen
+                        </label>
+                        <input type="url" name="imagenUrl" id="imageUrl" placeholder="https://ejemplo.com/imagen.jpg"
+                            ngModel #imagenUrl="ngModel"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white">
+                        <p class="mt-2 text-xs text-gray-500">Ingresa la URL de una imagen</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200">
+                <button type="submit" [disabled]="restaurantForm.pristine"
+                    class="flex-1 px-6 py-3 bg-teal-700 text-white rounded-xl font-semibold hover:bg-teal-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-teal-600 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0">
+                    Guardar cambios
+                </button>
+            </div>
+
+        </form>
+
+    </main>
+</div>

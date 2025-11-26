@@ -1,0 +1,60 @@
+<div class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-0 sm:p-4">
+
+    <div
+        class="bg-white rounded-none sm:rounded-2xl shadow-2xl w-full h-full sm:h-auto sm:max-w-lg flex flex-col overflow-hidden">
+
+        <header
+            class="sticky top-0 z-10 bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center justify-between">
+            <button
+                class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
+                title="Cerrar">
+                <span class="text-2xl text-gray-600 leading-none">
+                    <lucide-angular [img]="backIcon" [size]="24" [strokeWidth]="3"
+                        class="text-teal-600 group-hover:text-white transition-colors"></lucide-angular>
+                </span>
+            </button>
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-teal-700">Agregar Descuento</h1>
+        </header>
+
+        <div class="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6">
+
+            <form class="space-y-6" #discountForm="ngForm" (ngSubmit)="handleFormSubmission(discountForm)">
+
+                <div>
+                    <label for="discount" class="block text-sm font-semibold text-gray-900 mb-2">
+                        Descuento (%)*
+                    </label>
+                    <input id="discount" name="discount" type="number" required min="0" max="100" ngModel #discount="ngModel"
+                        placeholder="Ej: 15"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white" />
+                </div>
+
+                <div>
+                    <label for="startDate" class="block text-sm font-semibold text-gray-900 mb-2">
+                        Fecha de inicio*
+                    </label>
+                    <input id="startDate" name="startDate" type="date" required ngModel #startDate="ngModel"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white" />
+                </div>
+
+                <div>
+                    <label for="endDate" class="block text-sm font-semibold text-gray-900 mb-2">
+                        Fecha de fin*
+                    </label>
+                    <input id="endDate" name="endDate" type="date" required ngModel #endDate="ngModel"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600 focus:ring-opacity-40 bg-white" />
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200">
+                    <button type="submit" [disabled]="discountForm.invalid || discountForm.pristine"
+                        class="sm:flex-1 px-6 py-3 bg-teal-700 text-white rounded-xl font-semibold hover:bg-teal-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-teal-600 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0">
+                        Aplicar Descuento
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

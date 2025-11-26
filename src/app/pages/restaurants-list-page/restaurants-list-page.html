@@ -1,1 +1,39 @@
-<p>restaurants-list-page works!</p>
+<div class="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
+    <header class="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm px-4 sm:px-6 lg:px-10 py-6">
+        <div class="max-w-6xl mx-auto flex flex-col gap-6">
+            <h1 class="text-4xl sm:text-5xl font-bold text-teal-700 text-center">Menüo</h1>
+            <div class="relative flex rounded-2xl bg-gray-100 focus-within:ring-2 focus-within:ring-teal-600">
+                <input type="text" #q name="search" [value]="query" (input)="query = q.value"
+                    class="flex-1 bg-transparent px-6 py-4 text-base focus:outline-none"
+                    placeholder="Buscar restaurantes..." aria-label="Buscar restaurantes" (keyup.enter)="search()"
+                    (keydown.enter)="search()">
+                <button type="button" (click)="search()" aria-label="Ejecutar búsqueda"
+                    class="absolute top-1/2 -translate-y-1/2 right-2 px-4 py-2 bg-teal-700 text-white rounded-xl hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-600 transition">
+                    <lucide-angular [img]="SearchIcon" [size]="24" [strokeWidth]="3"></lucide-angular>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="px-4 sm:px-6 lg:px-10 py-8 pb-32 max-w-6xl mx-auto">
+        <section class="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-900">Resultados de tu búsqueda</h2>
+                @if (restaurants && restaurants.length > 0) {
+                <span class="text-sm text-gray-500">{{restaurants.length}} encontrado(s)</span>
+                }
+            </div>
+            <div class="space-y-4">
+                @for (restaurant of restaurants; track $index) {
+                <div>
+                    <app-restaurant-list-item [restaurant]="restaurant"
+                        [routerLink]="['/restaurants', restaurant.id]" />
+                </div>
+                }
+                @if (restaurants && restaurants.length === 0) {
+                <p class="text-sm text-gray-500">No se encontraron restaurantes para "{{query}}".</p>
+                }
+            </div>
+        </section>
+    </main>
+</div>

@@ -1,0 +1,260 @@
+/* MOBILE FIRST - Ocupa toda la pantalla */
+.product-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  padding: 0;
+}
+
+.product-form-container {
+  background: white;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.form-title {
+padding: 1.5rem 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.close-btn:hover {
+  background: #f8f9fa;
+}
+
+/* Formulario */
+.product-form {
+  flex: 1;
+  padding: 0 0.5rem 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s;
+  background: white;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255,107,53,0.1);
+}
+
+.form-input::placeholder, .form-textarea::placeholder {
+  color: #6c757d;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Checkboxes */
+.checkboxes-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.checkbox-label:hover {
+  border-color: #ff6b35;
+  background: #fff9f7;
+}
+
+.checkbox-input {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  accent-color: #ff6b35;
+}
+
+.checkbox-text {
+  font-weight: 500;
+  color: #1a1a1a;
+  font-size: 0.95rem;
+}
+
+/* Botones */
+.form-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.cancel-btn, .submit-btn {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cancel-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #5a6268;
+}
+
+.submit-btn {
+  background: #ff6b35;
+  color: white;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #e55a2b;
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* TABLET (768px+) - Más chico con fondo inhabilitado */
+@media (min-width: 768px) {
+  .product-modal-overlay {
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .product-form-container {
+    border-radius: 20px;
+    max-height: 90vh;
+    max-width: 600px;
+    width: 100%;
+    flex: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .form-header {
+    padding: 1.5rem 2rem;
+  }
+
+  .product-form {
+    padding: 2rem;
+  }
+}
+
+/* PC (1024px+) */
+@media (min-width: 1024px) {
+  .product-form-container {
+    max-width: 500px;
+  }
+  
+  .form-title {
+    font-size: 1.75rem;
+  }
+}
+
+
+.dropdown-container{
+     flex: 1;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-dropdown {
+    padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.dropdown {
+display: flex;
+flex-direction: column;
+align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  background: white;
+  border-radius: 6px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #eee;
+}

@@ -1,0 +1,127 @@
+<div class="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen relative">
+    @if (isLoading) {
+    <div class="fixed inset-0 bg-white/60 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-8 shadow-2xl flex flex-col items-center gap-4">
+            <div class="w-16 h-16 border-4 border-teal-200 border-t-teal-700 rounded-full animate-spin"></div>
+            <p class="text-gray-700 font-semibold">Cargando menú...</p>
+        </div>
+    </div>
+    }
+    <header class="sticky top-0 z-10 bg-white shadow-sm border-b border-gray-200 px-4 sm:px-6 lg:px-10 py-4">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-teal-700 text-right sm:order-2">Editar Menú</h1>
+            <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:order-1">
+                <button (click)="back()"
+                    class="flex items-center justify-center gap-1 px-2 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gray-600">
+                    <lucide-angular [img]="BackIcon" [size]="16" [strokeWidth]="2"></lucide-angular>
+                    <span class="text-xs sm:text-sm font-semibold">Volver</span>
+            </button>
+                <a routerLink="happy-hour-config"
+                    class="flex items-center justify-center gap-1 px-2 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-all hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-amber-600">
+                    <lucide-angular [img]="ClockIcon" [size]="16" [strokeWidth]="2"></lucide-angular>
+                    <span class="text-xs sm:text-sm font-semibold">Happy hour</span>
+                </a>
+                <a routerLink="add-product"
+                    class="flex items-center justify-center gap-1 px-2 py-2 bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-all hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-teal-600">
+                    <lucide-angular [img]="PlusIcon" [size]="16" [strokeWidth]="2"></lucide-angular>
+                    <span class="text-xs sm:text-sm font-semibold">Producto</span>
+                </a>
+                <a routerLink="add-category"
+                    class="flex items-center justify-center gap-1 px-2 py-2 bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-all hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-teal-600">
+                    <lucide-angular [img]="PlusIcon" [size]="16" [strokeWidth]="2"></lucide-angular>
+                    <span class="text-xs sm:text-sm font-semibold">Categoría</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="px-2 sm:px-4 md:px-6 lg:px-10 py-8 pb-32 max-w-6xl mx-auto">
+
+        @if (productsWithoutCategory.length > 0) {
+        <section class="mb-12 bg-white rounded-2xl p-3 sm:p-6 shadow-md border border-gray-200">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <lucide-angular [img]="AlertCircleIcon" [size]="20" [strokeWidth]="2"
+                        class="text-yellow-600"></lucide-angular>
+                </div>
+                <h2 class="text-base sm:text-xl md:text-2xl font-bold text-gray-900">Productos sin categoría</h2>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                @for(product of productsWithoutCategory; track $index) {
+                <app-product-list-item [productId]="product.id" [restaurantId]="id!" [routerLink]="['edit-product', product.id]" />
+                }
+            </div>
+        </section>
+        }
+
+        @if (categories && categories.length > 0) {
+        @for(category of categoriesWithProducts; track $index) {
+        <section
+            class="mb-8 bg-white rounded-2xl p-3 sm:p-6 shadow-md border border-gray-200 hover:shadow-lg transition-shadow">
+
+            <div class="flex justify-between sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+                <h2 class="text-base sm:text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-2 break-words">
+                    <span class="w-1 h-6 bg-teal-600 rounded-full"></span>
+                    {{category.name}}
+                    <span class="text-sm font-normal text-gray-500">({{category.productIds.length}})</span>
+                </h2>
+
+                <div class="flex flex-wrap gap-2">
+                    <a [routerLink]="['add-product-to-category', category.id]"
+                        class="group flex items-center gap-2 px-4 py-2 bg-teal-700 text-white rounded-xl hover:bg-teal-800 transition-all focus:outline-none focus:ring-2 focus:ring-teal-600"
+                        title="Agregar producto">
+                        <lucide-angular [img]="PlusIcon" [size]="20" [strokeWidth]="2"></lucide-angular>
+                        <span class="hidden sm:inline">Agregar producto</span>
+                    </a>
+                    <a [routerLink]="['delete-product-to-category', category.id]"
+                        class="group flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-all focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        title="Remover productos">
+                        <lucide-angular [img]="MinusIcon" [size]="20" [strokeWidth]="2"></lucide-angular>
+                        <span class="hidden sm:inline">Quitar producto</span>
+                </a>
+                    <a [routerLink]="['edit-category/', category.id]"
+                        class="group flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        title="Editar categoría">
+                        <lucide-angular [img]="EditIcon" [size]="20" [strokeWidth]="2"></lucide-angular>
+                        <span class="hidden md:inline">Editar</span>
+                    </a>
+                    <button (click)="deleteCategory(category)"
+                        class="group flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all focus:outline-none focus:ring-2 focus:ring-red-500"
+                        title="Eliminar categoría">
+                        <lucide-angular [img]="TrashIcon" [size]="20" [strokeWidth]="2"></lucide-angular>
+                        <span class="hidden md:inline">Eliminar</span>
+                    </button>
+                </div>
+            </div>
+
+            @if (category.productIds.length > 0) {
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                @for(productId of category.productIds; track $index) {
+                <app-product-list-item [productId]="productId" [restaurantId]="id!" [routerLink]="['edit-product/', productId]" />
+                }
+            </div>
+            } @else {
+            <div class="text-center py-12">
+                <p class="text-gray-500">No hay productos en esta categoría</p>
+                <a [routerLink]="['add-product-to-category', category.id]"
+                    class="mt-4 text-teal-700 hover:text-teal-800 font-semibold">
+                    Agregar el primero
+            </a>
+            </div>
+            }
+        </section>
+        }
+        } @else {
+        <div class="bg-white rounded-2xl p-12 shadow-md text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">No hay categorías creadas</h3>
+            <p class="text-gray-600 mb-6">Crea tu primer categoría para organizar tus productos</p>
+            <a routerLink="add-category" class="px-6 py-3 bg-teal-700 text-white rounded-xl hover:bg-teal-800 transition-colors">
+                Crear categoría
+            </a>
+        </div>
+        }
+
+    </main>
+</div>
+
+<router-outlet />

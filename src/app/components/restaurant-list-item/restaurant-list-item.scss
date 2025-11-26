@@ -1,0 +1,50 @@
+.restaurant-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.restaurant-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.restaurant-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+}
+
+
+.restaurant-details {
+    display: flex;
+    gap: 12px;
+}
+
+.restaurant-detail {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.restaurant-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.restaurant-content {
+  flex: 1;
+}

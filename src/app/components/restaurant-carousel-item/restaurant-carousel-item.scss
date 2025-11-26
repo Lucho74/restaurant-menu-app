@@ -1,0 +1,83 @@
+.restaurant-item {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.restaurant-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.restaurant-image {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+}
+
+.restaurant-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.restaurant-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff6b35;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.restaurant-info {
+  padding: 1rem;
+}
+
+.restaurant-name {
+  color: #1a1a1a;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  /* Tu fuente aquí */
+}
+
+.restaurant-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.restaurant-category {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.restaurant-rating {
+  color: #1a1a1a;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.restaurant-details {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.delivery-time, .delivery-price {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Multi-line clamp (2 lines) for long descriptions */
+/* Removed multi-line clamp; using Tailwind truncate utility for single-line ellipsis */

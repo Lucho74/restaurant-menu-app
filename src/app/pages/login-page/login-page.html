@@ -1,25 +1,50 @@
-<div>
-    <form (ngSubmit)="login(loginForm)" #loginForm="ngForm">
-        <div>
-            <label for="email" class="visually-hidden">Email</label>
-            <input type="email" id="email" name="email" placeholder="Email" ngModel required #email="ngModel">
+<div
+    class="bg-gradient-to-b from-gray-50 to-gray-100 md:fixed md:inset-0 md:h-screen md:w-screen md:overflow-hidden md:flex md:flex-col">
+    <header class="top-0 px-4 sm:px-6 lg:px-10 pt-6 md:shrink-0">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl font-bold text-teal-700 text-center">Menüo</h1>
         </div>
-        <div>
-            <label for="password" class="visually-hidden">Contraseña</label>
-            <input type="password" id="password" name="password" placeholder="Contraseña" ngModel required
-                #password="ngModel">
-        </div>
-        @if((!email.pristine && email.invalid) || (!password.pristine && password.invalid)){
-            <p class="error">Email o contraseña invalido.</p>
-            }
-        <div class="spinner">
-            @if (backRequest) {
-                
-            }
-        </div>
+    </header>
+    <div class="flex flex-col items-center px-4 py-10 pb-32 md:py-6 md:pb-6 min-h-0 md:flex-1 md:overflow-hidden">
+        <form class="w-full max-w-md p-0 md:p-6 md:bg-white md:rounded-2xl md:shadow-md md:border md:border-gray-200"
+            (ngSubmit)="login(loginForm)" #loginForm="ngForm">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-8">Iniciar Sesión</h2>
+
+            <div class="mb-6">
+                <label for="email" class="block font-semibold text-gray-900 mb-2 text-sm">Email*</label>
+                <input id="email" name="email" type="email" placeholder="tu@email.com" ngModel #email="ngModel" required
+                    autocomplete="email"
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] focus:ring-opacity-40 bg-white placeholder:text-gray-400">
+                @if (!email.pristine && email.invalid) {<span class="text-red-600 text-xs mt-1">Email inválido</span>}
+            </div>
+
+            <div class="mb-6">
+                <label for="password" class="block font-semibold text-gray-900 mb-2 text-sm">Contraseña*</label>
+                <input id="password" name="password" type="password" placeholder="Tu contraseña" ngModel
+                    #password="ngModel" required autocomplete="current-password"
+                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-base transition-all focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)] focus:ring-opacity-40 bg-white placeholder:text-gray-400">
+                @if (!password.pristine && password.invalid) {<span class="text-red-600 text-xs mt-1">Campo
+                    requerido</span>}
+            </div>
+
             @if (error) {
-                <p class="error">Datos incorrectos, intente nuevamente.</p>
+            <div class="bg-red-100 text-red-800 px-4 py-3 rounded-lg mb-4 text-sm">Datos incorrectos, intente
+                nuevamente.</div>
             }
-        <button [disabled]="loginForm.invalid || backRequest">Acceder</button>
-    </form>
+
+            @if (backRequest) {
+            <div class="text-center text-[var(--primary)] mb-4 font-semibold">Cargando...</div>
+            }
+
+            <button type="submit" [disabled]="loginForm.invalid || backRequest"
+                class="w-full bg-teal-700 text-white border-none px-8 py-4 rounded-xl text-base font-semibold cursor-pointer transition-all hover:bg-teal-800 hover:-translate-y-0.5 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none box-border">Iniciar
+                Sesión</button>
+
+            <div class="mt-6 text-center">
+                <a routerLink="/register"
+                    class="inline-block text-sm font-medium text-teal-700 hover:text-teal-800 transition-colors">Quiero
+                    inscribir mi negocio</a>
+            </div>
+        </form>
+    </div>
 </div>

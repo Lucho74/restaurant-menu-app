@@ -1,1 +1,66 @@
-<p>home-page works!</p>
+<div class="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
+    <header class="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm px-4 sm:px-6 lg:px-10 py-6">
+        <div class="max-w-6xl mx-auto flex flex-col gap-6">
+            <h1 class="text-4xl sm:text-5xl font-bold text-teal-700 text-center">Menüo</h1>
+            <div class="relative flex rounded-2xl bg-gray-100 focus-within:ring-2 focus-within:ring-teal-600">
+                <input type="text" #input class="flex-1 bg-transparent px-6 py-4 text-base focus:outline-none"
+                    placeholder="Buscar restaurantes..." aria-label="Buscar restaurantes"
+                    (keyup.enter)="search(input.value)" (keydown.enter)="search(input.value)">
+                <button type="button" (click)="search(input.value)" aria-label="Ejecutar búsqueda"
+                    class="absolute top-1/2 -translate-y-1/2 right-2 px-4 py-2 bg-teal-700 text-white rounded-xl hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-600 transition">
+                    <lucide-angular [img]="SearchIcon" [size]="24" [strokeWidth]="3"></lucide-angular>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="px-4 sm:px-6 lg:px-10 py-8 pb-32 max-w-6xl mx-auto">
+        @if (recentRestaurants && recentRestaurants.length > 0) {
+        <section class="mb-10 bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-900">Visitados recientemente</h2>
+            </div>
+            <div class="flex gap-4 overflow-x-auto scroll-smooth -mx-2 px-2 pb-2">
+                @for (restaurant of recentRestaurants; track $index) {
+                <div class="flex-shrink-0 w-64">
+                    <app-restaurant-carousel-item [restaurant]="restaurant"
+                        [routerLink]="['/restaurants', restaurant.id]" />
+                </div>
+                }
+            </div>
+        </section>
+        }
+
+        @if (mostVisit && mostVisit.length > 0) {
+        <section class="mb-10 bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-900">Más visitados</h2>
+            </div>
+            <div class="flex gap-4 overflow-x-auto scroll-smooth -mx-2 px-2 pb-2">
+                @for (restaurant of mostVisit; track $index) {
+                <div class="flex-shrink-0 w-64">
+                    <app-restaurant-carousel-item [restaurant]="restaurant"
+                        [routerLink]="['/restaurants', restaurant.id]" />
+                </div>
+                }
+            </div>
+        </section>
+        }
+
+        @if (restaurantsWithHH && restaurantsWithHH.length > 0) {
+        <section class="bg-white rounded-2xl p-6 shadow-md border border-gray-200">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-900">¡HappyHour!</h2>
+            </div>
+            <div class="flex gap-4 overflow-x-auto scroll-smooth -mx-2 px-2 pb-2">
+                @for (restaurant of restaurantsWithHH; track $index) {
+                <div class="flex-shrink-0 w-64">
+                    <app-restaurant-carousel-item [restaurant]="restaurant"
+                        [routerLink]="['/restaurants', restaurant.id]" />
+                </div>
+                }
+            </div>
+        </section>
+        }
+    </main>
+</div>

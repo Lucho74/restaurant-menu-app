@@ -1,0 +1,35 @@
+<div class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-0 sm:p-4">
+    <div
+        class="bg-white rounded-none sm:rounded-2xl shadow-2xl w-full h-full sm:h-auto sm:max-w-2xl sm:max-h-[90vh] flex flex-col overflow-hidden">
+        <header
+            class="sticky top-0 z-10 bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center justify-between">
+            <button (click)="close()"
+                class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400">
+                <span class="text-2xl text-gray-600 leading-none">
+                    <lucide-angular [img]="backIcon" [size]="24" [strokeWidth]="3"
+                        class="text-teal-600 group-hover:text-white transition-colors"></lucide-angular>
+                </span>
+            </button>
+            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-teal-700">Quitar producto de categoría</h1>
+        </header>
+        <div class="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6">
+            <div class="space-y-2">
+                @if (productsToDelete.length === 0) {
+                <div class="text-center py-12">
+                    <p class="text-gray-500 font-medium">No hay productos en la categoría</p>
+                    <p class="text-sm text-gray-400 mt-1">Añade productos primero</p>
+                </div>
+                }
+                @else {
+                <h2
+                    class="text-base sm:text-l md:text-xl font-bold text-gray-900 flex items-center gap-2 break-words mb-5">
+                    Selecciona el producto que deseas eliminar de la categoría.</h2>
+                @for (product of productsToDelete; track $index) {
+                <app-product-list-item [productId]="product.id" [restaurantId]="id!" (click)="deleteProduct(product.id)"
+                    class="cursor-pointer hover:bg-gray-50 rounded-xl transition-colors" />
+                }
+                }
+            </div>
+        </div>
+    </div>
+</div>

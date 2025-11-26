@@ -1,0 +1,24 @@
+<nav aria-label="Navegación principal"
+    class="fixed bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-6 px-4 py-3 rounded-2xl shadow-lg z-50 bg-white/80 border border-gray-200 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md">
+    <a routerLink="/restaurants" aria-label="Buscar restaurantes"
+        class="relative text-teal-700 w-12 h-12 flex items-center justify-center rounded-xl transition-all hover:bg-gray-100 hover:scale-110"
+        [class.bg-gray-300]="router.url === '/restaurants'" [class.scale-110]="router.url === '/restaurants'">
+        <lucide-angular [img]="SearchIcon" [size]="24" [strokeWidth]="3"></lucide-angular>
+        <span class="sr-only">Buscar</span>
+    </a>
+
+    <a routerLink="/" aria-label="Inicio"
+        class="relative text-teal-700 w-12 h-12 flex items-center justify-center rounded-xl transition-all hover:bg-gray-100 hover:scale-110 "
+        [class.bg-gray-300]="router.url === '/'" [class.scale-110]="router.url === '/'">
+        <lucide-angular [img]="HouseIcon" [size]="24" [strokeWidth]="3"></lucide-angular>
+        <span class="sr-only">Inicio</span>
+    </a>
+
+    <a (click)="isAuthenticated()" aria-label="Mi restaurante"
+        class="relative text-teal-700 w-12 h-12 flex items-center justify-center rounded-xl transition-all hover:bg-gray-100 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-teal-600"
+        [class.bg-gray-300]="router.url === '/login' || router.url.includes('/my-restaurant')"
+        [class.scale-110]="router.url === '/login' || router.url.includes('/my-restaurant')">
+        <lucide-angular [img]="StoreIcon" [size]="24" [strokeWidth]="3"></lucide-angular>
+        <span class="sr-only">Mi restaurante</span>
+    </a>
+</nav>
