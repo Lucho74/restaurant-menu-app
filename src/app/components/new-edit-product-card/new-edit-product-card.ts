@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit, viewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { NewProduct, Product, ProductWithCategories } from '../../interfaces/product';
+import { NewProduct, Product, ProductWithCategories, Discount } from '../../interfaces/product';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ProductsService } from '../../services/products-service';
 import { ProductListItem } from "../product-list-item/product-list-item";
@@ -127,8 +127,15 @@ export class NewEditProductCard implements OnInit {
     this.router.navigate(['my-restaurant/' + this.id + "/menu/edit-product/" + product.id + "/add-discount"])
   }
 
-  deleteDiscount(product: ProductWithCategories) {
-    
+  async deleteDiscount(product: ProductWithCategories) {
+    const discount: Discount = {
+      hasDiscount: false,
+      discountPercentage: 0,
+      discountStart: "",
+      discountEnd: ""
+    }
+    await this.productService.applyDiscount(product.id, discount);
+    this.close()
   }
 
 
